@@ -25,10 +25,9 @@ CREATE PROCEDURE [dbo].[SP_Inserir{_tabela.NomeTabela}]";
             foreach(var item in _tabela.CamposInsert())
             {
                 template += $@"
-    {item.NomeDeclaracaoSql()},
-";
+    {item.NomeDeclaracaoSql()},";
             }
-            template.TrimEnd(',');
+            template = template.TrimEnd(',');
 
             template += $@"
 	
@@ -50,20 +49,18 @@ CREATE PROCEDURE [dbo].[SP_Inserir{_tabela.NomeTabela}]";
             foreach(var item in _tabela.CamposInsert())
             {
                 template += $@"
-            {item.NomeColuna},
-";
+            {item.NomeColuna},";
             }
-            template.TrimEnd(',');
+            template = template.TrimEnd(',');
             template += $@"
         ) VALUES 
         (";
             foreach (var item in _tabela.CamposInsert())
             {
                 template += $@"
-            @{item.NomeColuna},
-";
+            @{item.NomeColuna},";
             }
-            template.TrimEnd(',');
+            template = template.TrimEnd(',');
             template += $@"
         )
 

@@ -25,12 +25,12 @@
 
         private string ComplementoNulo()
         {
-            return Nulo ? "= NULL" : string.Empty;
+            return Nulo ? " = NULL" : string.Empty;
         }
 
         public string NomeDeclaracaoSql()
         {
-            return $"@{NomeColuna} {TipoColuna}{ComplementoDeclaracaoSql()} {ComplementoNulo()}";
+            return $"@{NomeColuna} {TipoColuna}{ComplementoDeclaracaoSql()}{ComplementoNulo()}";
         }
     }
 }
