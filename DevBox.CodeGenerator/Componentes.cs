@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using DevBox.CodeGenerator.Core.Models;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using DevBox.CodeGenerator.Core.Models;
 
 namespace DevBox.CodeGenerator
 {
@@ -122,12 +122,23 @@ namespace DevBox.CodeGenerator
                 },
                 new Connections
                 {
-                    Name = "Banco Teste",
+                    Name = "Mussak - Banco Teste",
                     ConnectionString =
                         @"Server=MUSSAK-PC\SQLEXPRESS;Database=BancoTeste;Trusted_Connection=True;MultipleActiveResultSets=true"
+                },
+                new Connections
+                {
+                    Name = "Momentum Homolog",
+                    ConnectionString =
+                        @"server=192.168.0.192;database=GrupoKasil_Homolog;user id=homolog;password=sqlprod"
+                },
+                 new Connections
+                {
+                    Name = "GCPro Homolog",
+                    ConnectionString =
+                        @"server=192.168.7.12;database=GCProHomolog;user id=sqlhomolog;password=1eng@ENG"
                 }
             };
-
             return a;
         }
     }
