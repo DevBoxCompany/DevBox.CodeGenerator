@@ -9,7 +9,7 @@ using DevBox.CodeGenerator.Core.Models;
 
 namespace DevBox.CodeGenerator
 {
-    public partial class FormPrincipal : Form
+    public partial class FormPrincipal : FormBase
     {
         private List<CampoTabela> _camposTabela;
 
@@ -151,15 +151,6 @@ namespace DevBox.CodeGenerator
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(cbConnections.SelectedValue.ToString());
-        }
-
-        public void Warn(string text)
-        {
-            MessageBox.Show(text, @"Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-        public void Error(string text)
-        {
-            MessageBox.Show(text, @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
