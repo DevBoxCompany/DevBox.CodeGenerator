@@ -2,6 +2,7 @@
 {
     public class CampoTabela
     {
+        public int Id { get; set; }
         public string NomeColuna { get; set; }
         public string TipoColuna { get; set; }
         public bool Nulo { get; set; }
@@ -11,6 +12,13 @@
         public int? QuantidadeMaximaCaracteres { get; set; }
         public byte? PrecisaoNumero { get; set; }
         public int? EscalaNumero { get; set; }
+
+        public string Alias { get; set; }
+        public bool Post { get; set; }
+        public bool Put { get; set; }
+        public bool Delete { get; set; }
+        public bool Get { get; set; }
+        public bool GetId { get; set; }
 
         private string ComplementoDeclaracaoSql()
         {

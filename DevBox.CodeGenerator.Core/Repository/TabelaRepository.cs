@@ -7,10 +7,10 @@ namespace DevBox.CodeGenerator.Core.Repository
     public class TabelaRepository
     {
         private readonly SqlConnection _sqlConnection;
-        public TabelaRepository()
+        public TabelaRepository(string connectionString)
         {
-            const string conn = @"Server=MUSSAK-PC\SQLEXPRESS;Database=BancoTeste;Trusted_Connection=True;MultipleActiveResultSets=true";
-            _sqlConnection = new SqlConnection(conn);
+            //const string conn = @"Server=MUSSAK-PC\SQLEXPRESS;Database=BancoTeste;Trusted_Connection=True;MultipleActiveResultSets=true";
+            _sqlConnection = new SqlConnection(connectionString);
         }
 
         //Usuario
