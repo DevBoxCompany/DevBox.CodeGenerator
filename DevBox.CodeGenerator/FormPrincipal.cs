@@ -26,9 +26,9 @@ namespace DevBox.CodeGenerator
                 CamposTabela = lstCamposTabela
             });
 
-            using (var file = new StreamWriter(@"C:\Users\Vinícius\Desktop\Gerador\Procedure.sql", true))
+            using (var file = new StreamWriter($@"C:\Users\Vinícius\Desktop\Gerador\{nomeTabela}.sql", true))
             {
-                file.Write(procedure.Cadastrar());
+                file.Write(procedure.GerarCompleto());
             }
 
         }
