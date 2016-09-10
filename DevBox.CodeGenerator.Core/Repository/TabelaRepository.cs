@@ -41,7 +41,7 @@ namespace DevBox.CodeGenerator.Core.Repository
             using (var reader = command.ExecuteReader())
                 while (reader.Read())
                 {
-                    lstCampos.Add(new CampoTabela
+                    var campos = new CampoTabela
                     {
                         Id = cont,
                         NomeColuna = reader.GetString(reader.GetOrdinal("COLUMN_NAME")),
@@ -58,7 +58,14 @@ namespace DevBox.CodeGenerator.Core.Repository
                         EscalaNumero = reader.IsDBNull(reader.GetOrdinal("NUMERIC_SCALE"))
                             ? default(int?)
                             : reader.GetInt32(reader.GetOrdinal("NUMERIC_SCALE"))
-                    });
+                    };
+                    campos.Post = !campos.AutoIncremento;
+                    campos.Put = !campos.ChavePrimaria;
+                    campos.Delete = campos.ChavePrimaria;
+                    campos.Get = true;
+                    campos.GetId = true;
+
+                    lstCampos.Add(campos);
                     cont++;
                 }
 

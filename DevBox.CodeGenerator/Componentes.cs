@@ -46,16 +46,35 @@ namespace DevBox.CodeGenerator
         }
         public CheckBox Check(CampoTabela field, int i)
         {
-            return new CheckBox()
+            var chk = new CheckBox()
             {
                 AutoSize = true,
                 Location = new System.Drawing.Point(335 + (i * 40), 7),
-                Name = "checkBox" + field.Id + i,
+                Name = "checkBox" + field.Id + (i + 1),
                 Size = new System.Drawing.Size(15, 14),
                 UseVisualStyleBackColor = true,
                 Checked = !field.AutoIncremento,
                 Tag = i + 1,
             };
+
+            switch (i + 1)
+            {
+                case (int)Method.Post:
+                    chk.Checked = !field.AutoIncremento;
+                    break;
+                case (int)Method.Put:
+                    chk.Checked = !field.ChavePrimaria;
+                    break;
+                case (int)Method.Delete:
+                    chk.Visible = field.ChavePrimaria;
+                    chk.Checked = field.ChavePrimaria;
+                    break;
+                default:
+                    chk.Checked = true;
+                    break;
+            }
+
+            return chk;
         }
 
         public Panel Create(CampoTabela field, FormPrincipal form)
@@ -64,7 +83,7 @@ namespace DevBox.CodeGenerator
             {
                 Location = new System.Drawing.Point(3, Y),
                 Name = "panel" + field.Id,
-                Size = new System.Drawing.Size(569, 27),
+                Size = new System.Drawing.Size(551, 27),
                 Tag = field.Id,
                 BorderStyle = BorderStyle.Fixed3D
             };

@@ -133,24 +133,40 @@ namespace DevBox.CodeGenerator
             var directory = lblDiretorio.Text;
 
             if (string.IsNullOrEmpty(fileName))
+            {
+                Warn("Informe o nome do arquivo.");
                 return;
+            }
             if (string.IsNullOrEmpty(directory))
+            {
+                Warn("Informe o diretorio do arquivo.");
                 return;
+            }
 
             var procedure = new Procedures(new Tabela(txtNomeTabela.Text)
             {
                 CamposTabela = _camposTabela
-            });
+            }, txtAutor.Text);
 
             using (var file = new StreamWriter($@"{directory}\{fileName}.sql", true))
             {
                 file.Write(procedure.GerarCompleto());
+                Success("Procedures geradas com sucesso.");
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(cbConnections.SelectedValue.ToString());
+            using (var file =
+                new StreamWriter($@"{Application.StartupPath}\connections.txt", true))
+            {
+                file.Write("OI");
+            }
+        }
+
+        private void txtNomeTabela_KeyUp(object sender, KeyEventArgs e)
+        {
+            txtFile.Text = txtNomeTabela.Text;
         }
     }
 }

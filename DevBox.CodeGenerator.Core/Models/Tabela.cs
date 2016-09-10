@@ -16,17 +16,27 @@ namespace DevBox.CodeGenerator.Core.Models
 
         public IEnumerable<CampoTabela> CamposInsert()
         {
-            return CamposTabela.Where(x => !x.AutoIncremento);
+            return CamposTabela.Where(x => !x.AutoIncremento && x.Post);
         }
 
         public IEnumerable<CampoTabela> CamposUpdate()
         {
-            return CamposTabela;
+            return CamposTabela.Where(x => x.Put);
+        }
+
+        public IEnumerable<CampoTabela> CamposDelete()
+        {
+            return CamposTabela.Where(x => x.Delete);
         }
 
         public IEnumerable<CampoTabela> CamposSelect()
         {
-            return CamposTabela;
+            return CamposTabela.Where(x => x.Get);
+        }
+
+        public IEnumerable<CampoTabela> CamposSelectId()
+        {
+            return CamposTabela.Where(x => x.GetId);
         }
 
         public CampoTabela ChavePrimaria()
