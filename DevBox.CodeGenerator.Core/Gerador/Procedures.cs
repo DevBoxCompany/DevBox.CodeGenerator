@@ -169,7 +169,7 @@ GO";
             foreach (var item in _tabela.CamposSelect().Where(x => !x.ChavePrimaria))
             {
                 template += $@"
-    {item.NomeDeclaracaoSql()} = NULL,";
+    {item.NomeDeclaracaoSqlSemNulos()} = NULL,";
             }
             template = template.TrimEnd(',');
 
@@ -197,14 +197,14 @@ GO";
             template = template.TrimEnd().TrimEnd(',');
 
             template += $@"
-            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK){Environment.NewLine}{"\t\t\t\t"} ";
+            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK){Environment.NewLine}{"\t\t\t"}";
             var cont = 0;
             foreach (var item in _tabela.CamposSelect().Where(x => !x.ChavePrimaria))
             {
                 if (cont == 0)
-                    template += $@"WHERE (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"} ";
+                    template += $@"WHERE (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"}";
                 else
-                    template += $@"AND (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"} ";
+                    template += $@"AND (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"}";
                 cont++;
             }
 

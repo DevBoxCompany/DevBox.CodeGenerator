@@ -1,11 +1,11 @@
 ﻿using DevBox.CodeGenerator.Core.Gerador;
+using DevBox.CodeGenerator.Core.Models;
 using DevBox.CodeGenerator.Core.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using DevBox.CodeGenerator.Core.Models;
 
 namespace DevBox.CodeGenerator
 {

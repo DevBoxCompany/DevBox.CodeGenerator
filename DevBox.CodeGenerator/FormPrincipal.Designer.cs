@@ -56,9 +56,9 @@
             this.lblDiretorio = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtAutor = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,7 +80,7 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel5.BackColor = System.Drawing.Color.RoyalBlue;
             this.panel5.Controls.Add(this.button3);
             this.panel5.Controls.Add(this.cbConnections);
             this.panel5.Controls.Add(this.label14);
@@ -116,7 +116,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.ForeColor = System.Drawing.Color.Black;
             this.label14.Location = new System.Drawing.Point(28, 50);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(52, 17);
@@ -136,7 +136,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.ForeColor = System.Drawing.Color.Black;
             this.label10.Location = new System.Drawing.Point(28, 4);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(120, 17);
@@ -159,7 +159,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Location = new System.Drawing.Point(10, 10);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(102, 17);
@@ -176,7 +176,7 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel4.BackColor = System.Drawing.Color.RoyalBlue;
             this.panel4.Controls.Add(this.checkBox11);
             this.panel4.Controls.Add(this.label13);
             this.panel4.Controls.Add(this.checkBox12);
@@ -198,6 +198,7 @@
             // checkBox11
             // 
             this.checkBox11.AutoSize = true;
+            this.checkBox11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.checkBox11.Location = new System.Drawing.Point(466, 21);
             this.checkBox11.Name = "checkBox11";
             this.checkBox11.Size = new System.Drawing.Size(15, 14);
@@ -209,7 +210,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label13.Location = new System.Drawing.Point(263, 20);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(37, 13);
@@ -219,6 +220,7 @@
             // checkBox12
             // 
             this.checkBox12.AutoSize = true;
+            this.checkBox12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.checkBox12.Location = new System.Drawing.Point(426, 21);
             this.checkBox12.Name = "checkBox12";
             this.checkBox12.Size = new System.Drawing.Size(15, 14);
@@ -230,7 +232,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label12.Location = new System.Drawing.Point(87, 20);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(52, 13);
@@ -240,6 +242,7 @@
             // checkBox13
             // 
             this.checkBox13.AutoSize = true;
+            this.checkBox13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.checkBox13.Location = new System.Drawing.Point(386, 21);
             this.checkBox13.Name = "checkBox13";
             this.checkBox13.Size = new System.Drawing.Size(15, 14);
@@ -260,6 +263,7 @@
             // checkBox14
             // 
             this.checkBox14.AutoSize = true;
+            this.checkBox14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.checkBox14.Location = new System.Drawing.Point(346, 21);
             this.checkBox14.Name = "checkBox14";
             this.checkBox14.Size = new System.Drawing.Size(15, 14);
@@ -271,6 +275,7 @@
             // checkBox15
             // 
             this.checkBox15.AutoSize = true;
+            this.checkBox15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.checkBox15.Location = new System.Drawing.Point(506, 21);
             this.checkBox15.Name = "checkBox15";
             this.checkBox15.Size = new System.Drawing.Size(15, 14);
@@ -282,7 +287,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label7.Location = new System.Drawing.Point(413, 5);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
@@ -292,7 +297,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label5.Location = new System.Drawing.Point(490, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
@@ -302,7 +307,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label4.Location = new System.Drawing.Point(380, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
@@ -312,7 +317,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label3.Location = new System.Drawing.Point(335, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
@@ -322,7 +327,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label6.Location = new System.Drawing.Point(460, 5);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 13);
@@ -343,7 +348,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(10, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 17);
@@ -352,7 +357,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.txtAutor);
             this.panel2.Controls.Add(this.label2);
@@ -366,21 +371,11 @@
             this.panel2.Size = new System.Drawing.Size(587, 152);
             this.panel2.TabIndex = 18;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(489, 717);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Testes";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(10, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 17);
@@ -394,6 +389,16 @@
             this.txtAutor.Name = "txtAutor";
             this.txtAutor.Size = new System.Drawing.Size(373, 23);
             this.txtAutor.TabIndex = 18;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(489, 717);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Testes";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormPrincipal
             // 

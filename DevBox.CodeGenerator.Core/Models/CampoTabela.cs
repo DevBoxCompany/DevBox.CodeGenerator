@@ -36,9 +36,14 @@
             return Nulo ? " = NULL" : string.Empty;
         }
 
+        public string NomeDeclaracaoSqlSemNulos()
+        {
+            return $"@{NomeColuna} {TipoColuna}{ComplementoDeclaracaoSql()}";
+        }
+
         public string NomeDeclaracaoSql()
         {
-            return $"@{NomeColuna} {TipoColuna}{ComplementoDeclaracaoSql()}{ComplementoNulo()}";
+            return $"@{NomeDeclaracaoSqlSemNulos()}{ComplementoNulo()}";
         }
     }
 }
