@@ -36,11 +36,14 @@ namespace DevBox.CodeGenerator.Core.Repository
                                     WHERE TABLE_NAME = '{nomeTabela}'";
 
             _sqlConnection.Open();
+            var cont = 1;
             using (var command = new SqlCommand(commandText, _sqlConnection))
             using (var reader = command.ExecuteReader())
                 while (reader.Read())
+                {
                     lstCampos.Add(new CampoTabela
                     {
+                        Id = cont,
                         NomeColuna = reader.GetString(reader.GetOrdinal("COLUMN_NAME")),
                         TipoColuna = reader.GetString(reader.GetOrdinal("DATA_TYPE")),
                         Nulo = reader.GetBoolean(reader.GetOrdinal("IS_NULLABLE")),
@@ -56,6 +59,9 @@ namespace DevBox.CodeGenerator.Core.Repository
                             ? default(int?)
                             : reader.GetInt32(reader.GetOrdinal("NUMERIC_SCALE"))
                     });
+                    cont++;
+                }
+
 
             return lstCampos;
         }
