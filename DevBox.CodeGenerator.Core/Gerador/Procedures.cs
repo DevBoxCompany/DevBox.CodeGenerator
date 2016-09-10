@@ -8,10 +8,12 @@ namespace DevBox.CodeGenerator.Core.Gerador
     public class Procedures
     {
         private readonly Tabela _tabela;
+        public string Autor { get; set; }
 
-        public Procedures(Tabela tabela)
+        public Procedures(Tabela tabela, string autor)
         {
             _tabela = tabela;
+            Autor = string.IsNullOrEmpty(autor) ? "NomeAutor" : autor;
         }
 
         private string Cabecalho(Operacao operacao)
@@ -26,7 +28,10 @@ CREATE PROCEDURE [dbo].[SP_{operacao}{_tabela.NomeTabela}]";
 
         public string Cadastrar()
         {
-            string template = Cabecalho(Operacao.Inserir);
+            if (!_tabela.CamposInsert().Any())
+                return string.Empty;
+
+            var template = Cabecalho(Operacao.Inserir);
 
             foreach (var item in _tabela.CamposInsert())
             {
@@ -43,7 +48,7 @@ CREATE PROCEDURE [dbo].[SP_{operacao}{_tabela.NomeTabela}]";
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
 	Objetivo..........: Inserir um registro na tabela {_tabela.NomeTabela}
-	Autor.............: NomeAutor
+	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Inserir{_tabela.NomeTabela}]
 	*/
@@ -80,6 +85,9 @@ GO";
 
         public string Editar()
         {
+            if (!_tabela.CamposUpdate().Any())
+                return string.Empty;
+
             string template = Cabecalho(Operacao.Atualizar);
 
             foreach (var item in _tabela.CamposUpdate())
@@ -97,7 +105,7 @@ GO";
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
 	Objetivo..........: Atualizar um registro na tabela {_tabela.NomeTabela}
-	Autor.............: NomeAutor
+	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Atualizar{_tabela.NomeTabela}]
 	*/
@@ -120,8 +128,10 @@ GO";
 
         public string Excluir()
         {
-            string template = Cabecalho(Operacao.Excluir);
+            if (!_tabela.CamposDelete().Any())
+                return string.Empty;
 
+            string template = Cabecalho(Operacao.Excluir);
 
             template += $@"
     {_tabela.ChavePrimaria().NomeDeclaracaoSql()}";
@@ -134,7 +144,7 @@ GO";
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
 	Objetivo..........: Excluir um registro na tabela {_tabela.NomeTabela}
-	Autor.............: NomeAutor
+	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Excluir{_tabela.NomeTabela}]
 	*/
@@ -151,7 +161,17 @@ GO";
 
         public string Selecionar()
         {
+            if (!_tabela.CamposSelect().Any())
+                return string.Empty;
+
             string template = Cabecalho(Operacao.Selecionar);
+
+            foreach (var item in _tabela.CamposSelect().Where(x => !x.ChavePrimaria))
+            {
+                template += $@"
+    {item.NomeDeclaracaoSql()} = NULL,";
+            }
+            template = template.TrimEnd(',');
 
             template += $@"
 	
@@ -161,7 +181,7 @@ GO";
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
 	Objetivo..........: Selecionar registros na tabela {_tabela.NomeTabela}
-	Autor.............: NomeAutor
+	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Selecionar{_tabela.NomeTabela}]
 	*/
@@ -171,13 +191,24 @@ GO";
 		SELECT  ";
             foreach (var item in _tabela.CamposSelect())
             {
-                template += $@"{_tabela.Apelido()}.{item.NomeColuna},{Environment.NewLine}{"\t\t\t\t"}";
+                template += $@"{_tabela.Apelido()}.{item.NomeColuna}{(string.IsNullOrEmpty(item.Alias) ? string.Empty : " AS " + item.Alias)},{Environment.NewLine}{"\t\t\t\t"}";
             }
 
             template = template.TrimEnd().TrimEnd(',');
 
             template += $@"
-            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK)
+            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK){Environment.NewLine}{"\t\t\t\t"} ";
+            var cont = 0;
+            foreach (var item in _tabela.CamposSelect().Where(x => !x.ChavePrimaria))
+            {
+                if (cont == 0)
+                    template += $@"WHERE (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"} ";
+                else
+                    template += $@"AND (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"} ";
+                cont++;
+            }
+
+            template += $@"
 	END
 GO";
             return template;
@@ -185,6 +216,9 @@ GO";
 
         public string BuscarPorId()
         {
+            if (!_tabela.CamposSelectId().Any())
+                return string.Empty;
+
             string template = Cabecalho(Operacao.Buscar);
 
             template += $@"
@@ -198,7 +232,7 @@ GO";
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
 	Objetivo..........: Burcar registros na tabela {_tabela.NomeTabela} por Id
-	Autor.............: NomeAutor
+	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Buscar{_tabela.NomeTabela}]
 	*/
@@ -206,9 +240,9 @@ GO";
 	BEGIN
 
 		SELECT  ";
-            foreach (var item in _tabela.CamposSelect())
+            foreach (var item in _tabela.CamposSelectId())
             {
-                template += $@"{_tabela.Apelido()}.{item.NomeColuna},{Environment.NewLine}{"\t\t\t\t"}";
+                template += $@"{_tabela.Apelido()}.{item.NomeColuna}{(string.IsNullOrEmpty(item.Alias) ? string.Empty : " AS " + item.Alias)},{Environment.NewLine}{"\t\t\t\t"}";
             }
 
             template = template.TrimEnd().TrimEnd(',');

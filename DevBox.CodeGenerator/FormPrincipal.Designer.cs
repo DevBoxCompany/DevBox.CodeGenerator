@@ -31,6 +31,7 @@
             this.btnGerarProcedures = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
+            this.cbConnections = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtNomeTabela = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,8 +56,9 @@
             this.lblDiretorio = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cbConnections = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtAutor = new System.Windows.Forms.TextBox();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -66,9 +68,9 @@
             // 
             this.btnGerarProcedures.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnGerarProcedures.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGerarProcedures.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGerarProcedures.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGerarProcedures.ForeColor = System.Drawing.Color.White;
-            this.btnGerarProcedures.Location = new System.Drawing.Point(392, 66);
+            this.btnGerarProcedures.Location = new System.Drawing.Point(389, 114);
             this.btnGerarProcedures.Name = "btnGerarProcedures";
             this.btnGerarProcedures.Size = new System.Drawing.Size(192, 31);
             this.btnGerarProcedures.TabIndex = 17;
@@ -101,6 +103,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.btnBuscarFields_Click);
             // 
+            // cbConnections
+            // 
+            this.cbConnections.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbConnections.FormattingEnabled = true;
+            this.cbConnections.Location = new System.Drawing.Point(28, 24);
+            this.cbConnections.Name = "cbConnections";
+            this.cbConnections.Size = new System.Drawing.Size(252, 24);
+            this.cbConnections.TabIndex = 19;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -119,6 +130,7 @@
             this.txtNomeTabela.Name = "txtNomeTabela";
             this.txtNomeTabela.Size = new System.Drawing.Size(457, 23);
             this.txtNomeTabela.TabIndex = 11;
+            this.txtNomeTabela.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNomeTabela_KeyUp);
             // 
             // label10
             // 
@@ -242,7 +254,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Location = new System.Drawing.Point(6, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(575, 406);
+            this.panel1.Size = new System.Drawing.Size(575, 407);
             this.panel1.TabIndex = 1;
             // 
             // checkBox14
@@ -341,6 +353,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.txtAutor);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.btnGerarProcedures);
             this.panel2.Controls.Add(this.lblDiretorio);
@@ -349,21 +363,12 @@
             this.panel2.Controls.Add(this.btnBucarDiretorio);
             this.panel2.Location = new System.Drawing.Point(2, 559);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(587, 102);
+            this.panel2.Size = new System.Drawing.Size(587, 152);
             this.panel2.TabIndex = 18;
-            // 
-            // cbConnections
-            // 
-            this.cbConnections.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbConnections.FormattingEnabled = true;
-            this.cbConnections.Location = new System.Drawing.Point(28, 24);
-            this.cbConnections.Name = "cbConnections";
-            this.cbConnections.Size = new System.Drawing.Size(252, 24);
-            this.cbConnections.TabIndex = 19;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(489, 686);
+            this.button1.Location = new System.Drawing.Point(489, 717);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 20;
@@ -371,11 +376,30 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(10, 100);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 17);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Autor";
+            // 
+            // txtAutor
+            // 
+            this.txtAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAutor.Location = new System.Drawing.Point(13, 119);
+            this.txtAutor.Name = "txtAutor";
+            this.txtAutor.Size = new System.Drawing.Size(373, 23);
+            this.txtAutor.TabIndex = 18;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 721);
+            this.ClientSize = new System.Drawing.Size(590, 744);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel5);
@@ -422,6 +446,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox cbConnections;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtAutor;
     }
 }
 

@@ -17,5 +17,9 @@ namespace DevBox.CodeGenerator
         {
             MessageBox.Show(text, @"Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        public void Success(string text)
+        {
+            MessageBox.Show(text, @"Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
