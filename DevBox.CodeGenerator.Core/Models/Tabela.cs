@@ -24,6 +24,11 @@ namespace DevBox.CodeGenerator.Core.Models
             return CamposTabela;
         }
 
+        public IEnumerable<CampoTabela> CamposSelect()
+        {
+            return CamposTabela;
+        }
+
         public CampoTabela ChavePrimaria()
         {
             return CamposTabela.First(x => x.ChavePrimaria);
@@ -32,6 +37,11 @@ namespace DevBox.CodeGenerator.Core.Models
         public bool PossuiAutoIncremento()
         {
             return CamposTabela.Any(x => x.AutoIncremento);
+        }
+
+        public string Apelido()
+        {
+            return NomeTabela[0].ToString().ToLower();
         }
     }
 }

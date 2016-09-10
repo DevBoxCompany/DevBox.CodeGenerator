@@ -28,7 +28,7 @@ CREATE PROCEDURE [dbo].[SP_{operacao}{_tabela.NomeTabela}]";
         {
             string template = Cabecalho(Operacao.Inserir);
 
-            foreach(var item in _tabela.CamposInsert())
+            foreach (var item in _tabela.CamposInsert())
             {
                 template += $@"
     {item.NomeDeclaracaoSql()},";
@@ -52,7 +52,7 @@ CREATE PROCEDURE [dbo].[SP_{operacao}{_tabela.NomeTabela}]";
 
 		INSERT INTO [dbo].[{_tabela.NomeTabela}]
         (";
-            foreach(var item in _tabela.CamposInsert())
+            foreach (var item in _tabela.CamposInsert())
             {
                 template += $@"
             {item.NomeColuna},";
@@ -99,7 +99,7 @@ GO";
 	Objetivo..........: Atualizar um registro na tabela {_tabela.NomeTabela}
 	Autor.............: NomeAutor
  	Data..............: {DateTime.Today.ToShortDateString()}
-	Ex................: EXEC [dbo].[SP_Inserir{_tabela.NomeTabela}]
+	Ex................: EXEC [dbo].[SP_Atualizar{_tabela.NomeTabela}]
 	*/
 
 	BEGIN
@@ -120,12 +120,67 @@ GO";
 
         public string Excluir()
         {
-            return null;
+            string template = Cabecalho(Operacao.Excluir);
+
+
+            template += $@"
+    {_tabela.ChavePrimaria().NomeDeclaracaoSql()}";
+
+            template += $@"
+	
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
+	Objetivo..........: Excluir um registro na tabela {_tabela.NomeTabela}
+	Autor.............: NomeAutor
+ 	Data..............: {DateTime.Today.ToShortDateString()}
+	Ex................: EXEC [dbo].[SP_Excluir{_tabela.NomeTabela}]
+	*/
+
+	BEGIN
+
+		DELETE [dbo].[{_tabela.NomeTabela}]
+            WHERE {_tabela.ChavePrimaria().NomeColuna} = @{_tabela.ChavePrimaria().NomeColuna}
+            
+	END
+GO";
+            return template;
         }
 
         public string Selecionar()
         {
-            return null;
+            string template = Cabecalho(Operacao.Selecionar);
+
+            template += $@"
+	
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
+	Objetivo..........: Selecionar registros na tabela {_tabela.NomeTabela}
+	Autor.............: NomeAutor
+ 	Data..............: {DateTime.Today.ToShortDateString()}
+	Ex................: EXEC [dbo].[SP_Selecionar{_tabela.NomeTabela}]
+	*/
+
+	BEGIN
+
+		SELECT  ";
+            foreach (var item in _tabela.CamposSelect())
+            {
+                template += $@"{_tabela.Apelido()}.{item.NomeColuna},{Environment.NewLine}{"\t\t\t\t"}";
+            }
+
+            template = template.TrimEnd().TrimEnd(',');
+
+            template += $@"
+            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK)
+	END
+GO";
+            return template;
         }
 
         public string BuscarPorId()
