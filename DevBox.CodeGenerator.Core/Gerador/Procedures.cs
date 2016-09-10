@@ -185,7 +185,40 @@ GO";
 
         public string BuscarPorId()
         {
-            return null;
+            string template = Cabecalho(Operacao.Buscar);
+
+            template += $@"
+    {_tabela.ChavePrimaria().NomeDeclaracaoSql()}";
+
+            template += $@"
+	
+	AS
+
+	/*
+	Documentação
+	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
+	Objetivo..........: Burcar registros na tabela {_tabela.NomeTabela} por Id
+	Autor.............: NomeAutor
+ 	Data..............: {DateTime.Today.ToShortDateString()}
+	Ex................: EXEC [dbo].[SP_Buscar{_tabela.NomeTabela}]
+	*/
+
+	BEGIN
+
+		SELECT  ";
+            foreach (var item in _tabela.CamposSelect())
+            {
+                template += $@"{_tabela.Apelido()}.{item.NomeColuna},{Environment.NewLine}{"\t\t\t\t"}";
+            }
+
+            template = template.TrimEnd().TrimEnd(',');
+
+            template += $@"
+            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK)
+            WHERE {_tabela.Apelido()}.{_tabela.ChavePrimaria().NomeColuna} = @{_tabela.ChavePrimaria().NomeColuna}
+	END
+GO";
+            return template;
         }
 
         public string GerarCompleto()
