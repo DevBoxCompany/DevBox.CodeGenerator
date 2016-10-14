@@ -47,7 +47,7 @@ CREATE PROCEDURE [dbo].[SP_{operacao}{_tabela.NomeTabela}]";
 	/*
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
-	Objetivo..........: Inserir um registro na tabela {_tabela.NomeTabela}
+	Objetivo..........: Inserir um registro na tabela {_tabela.NomeTabelaCompleta}
 	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Inserir{_tabela.NomeTabela}]
@@ -55,7 +55,7 @@ CREATE PROCEDURE [dbo].[SP_{operacao}{_tabela.NomeTabela}]";
 
 	BEGIN
 
-		INSERT INTO [dbo].[{_tabela.NomeTabela}]
+		INSERT INTO [dbo].[{_tabela.NomeTabelaCompleta}]
         (";
             foreach (var item in _tabela.CamposInsert())
             {
@@ -112,7 +112,7 @@ GO";
 
 	BEGIN
 
-		UPDATE [dbo].[{_tabela.NomeTabela}]
+		UPDATE [dbo].[{_tabela.NomeTabelaCompleta}]
             SET ";
             foreach (var item in _tabela.CamposUpdate().Where(x => !x.ChavePrimaria))
             {
@@ -151,7 +151,7 @@ GO";
 
 	BEGIN
 
-		DELETE [dbo].[{_tabela.NomeTabela}]
+		DELETE [dbo].[{_tabela.NomeTabelaCompleta}]
             WHERE {_tabela.ChavePrimaria().NomeColuna} = @{_tabela.ChavePrimaria().NomeColuna}
             
 	END
@@ -169,7 +169,7 @@ GO";
             foreach (var item in _tabela.CamposSelect().Where(x => !x.ChavePrimaria))
             {
                 template += $@"
-    {item.NomeDeclaracaoSqlSemNulos()} = NULL,";
+     @{item.NomeDeclaracaoSqlSemNulos()} = NULL,";
             }
             template = template.TrimEnd(',');
 
@@ -180,7 +180,7 @@ GO";
 	/*
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
-	Objetivo..........: Selecionar registros na tabela {_tabela.NomeTabela}
+	Objetivo..........: Selecionar registros na tabela {_tabela.NomeTabelaCompleta}
 	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Selecionar{_tabela.NomeTabela}]
@@ -197,14 +197,14 @@ GO";
             template = template.TrimEnd().TrimEnd(',');
 
             template += $@"
-            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK){Environment.NewLine}{"\t\t\t"}";
+            FROM [dbo].[{_tabela.NomeTabelaCompleta}] {_tabela.Apelido()} WITH(NOLOCK){Environment.NewLine}{"\t\t\t"}";
             var cont = 0;
             foreach (var item in _tabela.CamposSelect().Where(x => !x.ChavePrimaria))
             {
                 if (cont == 0)
-                    template += $@"WHERE (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"}";
+                    template += $@"WHERE (@{item.NomeColuna} IS NULL OR {item.Comparacao(_tabela.Apelido())}){Environment.NewLine}{"\t\t\t\t"}";
                 else
-                    template += $@"AND (@{item.NomeColuna} IS NULL OR {item.NomeColuna} = @{item.NomeColuna}){Environment.NewLine}{"\t\t\t\t"}";
+                    template += $@"AND (@{item.NomeColuna} IS NULL OR {item.Comparacao(_tabela.Apelido())}){Environment.NewLine}{"\t\t\t\t"}";
                 cont++;
             }
 
@@ -231,7 +231,7 @@ GO";
 	/*
 	Documentação
 	Arquivo Fonte.....: {_tabela.NomeTabela}.sql
-	Objetivo..........: Burcar registros na tabela {_tabela.NomeTabela} por Id
+	Objetivo..........: Buscar registros na tabela {_tabela.NomeTabelaCompleta} por Id
 	Autor.............: {Autor}
  	Data..............: {DateTime.Today.ToShortDateString()}
 	Ex................: EXEC [dbo].[SP_Buscar{_tabela.NomeTabela}]
@@ -248,7 +248,7 @@ GO";
             template = template.TrimEnd().TrimEnd(',');
 
             template += $@"
-            FROM [dbo].[{_tabela.NomeTabela}] {_tabela.Apelido()} WITH(NOLOCK)
+            FROM [dbo].[{_tabela.NomeTabelaCompleta}] {_tabela.Apelido()} WITH(NOLOCK)
             WHERE {_tabela.Apelido()}.{_tabela.ChavePrimaria().NomeColuna} = @{_tabela.ChavePrimaria().NomeColuna}
 	END
 GO";
@@ -270,6 +270,7 @@ GO";
 
             return sb.ToString();
         }
+
 
         private enum Operacao
         {

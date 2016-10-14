@@ -38,12 +38,19 @@
 
         public string NomeDeclaracaoSqlSemNulos()
         {
-            return $"@{NomeColuna} {TipoColuna}{ComplementoDeclaracaoSql()}";
+            return $"{NomeColuna} {TipoColuna}{ComplementoDeclaracaoSql()}";
         }
 
         public string NomeDeclaracaoSql()
         {
             return $"@{NomeDeclaracaoSqlSemNulos()}{ComplementoNulo()}";
+        }
+
+        public string Comparacao(string apelido)
+        {
+            return TipoColuna == "varchar" 
+                ? $"{apelido}.{NomeColuna} LIKE '%' + @{NomeColuna} + '%'"
+                : $"{apelido}.{NomeColuna} = @{NomeColuna}";
         }
     }
 }

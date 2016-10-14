@@ -10,7 +10,22 @@ namespace DevBox.CodeGenerator.Core.Models
             NomeTabela = nomeTabela;
         }
 
-        public string NomeTabela { get; set; }
+        private string _nomeTabela;
+        public string NomeTabela
+        {
+            get
+            {
+                if (_nomeTabela.IndexOf('_') > 0)
+                {
+                    return _nomeTabela.Split('_')[1];
+                }
+
+                return _nomeTabela;
+            }
+            set { _nomeTabela = value; }
+        }
+
+        public string NomeTabelaCompleta => _nomeTabela;
 
         public IEnumerable<CampoTabela> CamposTabela { get; set; }
 
